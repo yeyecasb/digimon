@@ -3,7 +3,11 @@
     border-radius: 6px; } 
     #imagen:hover { transform: scale(2);}
 
-    body {
-        background-image: url("../images/fondo.jpg");
-        background-color: #cccccc;
-       }
+body {
+    background-image: url("../images/fondo.jpg");
+    }
+
+#principal {
+    background-color: #cccccc;
+    opacity: 0.9;
+}
