@@ -1,9 +1,9 @@
 #imagen { 
     transition: transform 0.2s ease-in-out; } 
     #imagen:hover { transform: scale(2);}
-.fondo{
-    background-image: url(assets/images/fondo.jpg);
-    background-size: 100% auto;
-    background-position: center top;
-    background-repeat: repeat-x;
+
+.bg-image{
+    background-image: url('assets/images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;        
 }
