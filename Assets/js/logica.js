@@ -18,118 +18,41 @@ function crearListado(resp){
 };});
 
 $(document).ready(function(){
-    let dato=document.getElementById("Select1");
+    let inputBusqueda=document.getElementById("inputBusqueda");
+    let botonBusqueda=document.getElementById("botonBusqueda");
+    botonBusqueda.addEventListener("click",()=>{
+    let terminoBusqueda=inputBusqueda.value;
+    console.log("El valor seleccionado es: " + terminoBusqueda);
+    fetch("https://digimon-api.vercel.app/api/digimon/name/" + terminoBusqueda)
 
-fetch('https://digimon-api.vercel.app/api/digimon')
-.then(response=>response.json())
-.then(resp=>{crearListado(resp)});
+    .then(response=>response.json())
+    .then(principal=>{borrarDiv(principal)})
+    .then(data=>{crearCard(data)});
 
-function crearListado(resp){
-
-    for(let datoTemporal of resp){
-        dato.innerHTML +=
-        `
-        <option>${datoTemporal.name}</option>
-        `
+    function borrarDiv(){
+        let principal=document.getElementById("principal");
+        principal.removeChild();
     };
-    let contenido=document.getElementById("contenido");
-    select.addEventListener("change", function () {
-    let selectedValue = select.options[select.selectedIndex].value;
-    fetch("https://digimon-api.vercel.app/api/digimon/name"+selectedValue)
-    .then(response => response.json())
-    .then(resp =>{crearCard(resp)});
-    function crearCard(resp){
-        contenido.innerHTML +=
-        `
-        <img src="${resp.img}" class="card-img-top" id="foto" alt="...">
-        <div class="card-body">
-        <h4 id="name" class="card-title">${resp.name}</h4>
-        <p id="level" class="card-text">${resp.level}</p>
-      </div>
-      <br>
-        `
-    };
-    });
-};});
-/*let contenido=document.getElementById("contenido");
 
-    select.addEventListener("change", function () {
-    let selectedValue = select.options[select.selectedIndex].value;
-    console.log("El valor seleccionado es: " + selectedValue);
-    fetch("https://digimon-api.vercel.app/api/digimon/name"+selectedValue)
-    .then(response => response.json())
-    .then(data => {
-      tarjeta(data)
-    });
-  });
-
-  function tarjeta(data) {
-
-    contenido.innerHTML = "";
-
-    contenido.innerHTML +=
+    function crearCard(data){
+        let contenedor=document.getElementById("contenedor");
+        contenedor.innerHTML ="";
+        contenedor.innerHTML +=
       `
       <div class="card" style="width: 20rem;">
     
-      <img src="${data.img}" class="card-img-top" id="foto" alt="...">
+      <img src="${data.img}" class="card-img-top" id="imagen" alt="...">
       <div class="card-body">
-        <h4 id="name" class="card-title">${data.name}</h4>
-        <p id="level" class="card-text">${data.level}</p>
+        <h2 id="nombre" class="card-title">${data.name}</h2>
+        <p id="nivel" class="card-text">${data.level}</p>
       </div>
-      <br>
-      `
-
-  }
-
-
-});
-
-$(document).ready(function () {
-
-  
-  
-    let select = document.getElementById("Select");
-  
-    select.addEventListener("change", function () {
-      let selectedValue = select.options[select.selectedIndex].value;
-      console.log("El valor seleccionado es: " + selectedValue);
-      fetch("https://studio-ghibli-films-api.herokuapp.com/api/"+selectedValue)
-      .then(response => response.json())
-      .then(data => {
-        tarjeta(data)
-      });
-    });
-  
-    function tarjeta(data) {
-  
-      informacion.innerHTML = "";
-  
-      informacion.innerHTML +=
-        `
-        <option>Escoge un digimon...</option>
-
-        <div class="card" style="width: 20rem;">
-      
-        <img src="${data.poster}" class="card-img-top" id="foto" alt="...">
-        <div class="card-body">
-          <h4 id="titulo" class="card-title">${data.title}</h4>
-          <p id="historia" class="card-text">${data.synopsis}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li id="tituloRomanizado" class="list-group-item"><strong>Título romanizado:</strong> ${data.hepburn}</li>
-          <li id="anio" class="list-group-item"><strong>Año de estreno:</strong> ${data.release}</li>
-          <li id="anio" class="list-group-item"><strong>Director:</strong> ${data.director}</li>
+      <div class="card-body">
         
-        </ul>
-        <div class="card-body">
-          
-          <a href="${data.url}" target="_blank" class="btn btn-primary">Más información</a>
-        </div>
-        </div>
-        </div>
-        <br>
-        `
-  
-    }
-  
-  });*/
+        <a href="https://digimon.fandom.com/wiki/${data.name}" target="_blank" class="btn btn-primary">Más información</a>
+      </div>
+      </div>
+      </div>
+      <br>`
+    };
+    });
+});

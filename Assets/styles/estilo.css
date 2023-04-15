@@ -4,6 +4,6 @@
     #imagen:hover { transform: scale(2);}
 
     body {
-        background-image: url("Assets/images/fondo.jpg");
+        background-image: url("../images/fondo.jpg");
         background-color: #cccccc;
        }
