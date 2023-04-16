@@ -39,26 +39,20 @@
             <form class="form-inline my-2 my-lg-0">
                 <input id="inputBusqueda" class="form-control mr-sm-2" type="search" placeholder="Buscar Digimon..."
                     aria-label="Search">
-                <button id="botonBusqueda" class="btn btn-outline-light my-2 my-sm-0" onclick="postBoton()">Buscar</button>
+                <button id="botonBusqueda" class="btn btn-outline-light my-2 my-sm-0"
+                    onclick="postBoton()">Buscar</button>
             </form>
         </div>
     </nav>
     <div class="contenedor">
         <div id="principal" class="container mt-3">
-            <table class="table container table-striped table-bordered text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Imagen</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Nivel</th>
-                    </tr>
-                </thead>
-                <tbody id="listado">
-
-                </tbody>
+            <div id="listado" class="row text-center">
+            </div>
         </div>
+    </div>
+    <div class="container" id="tarjeta">
+
     </div>
     <script src="Assets/js/logica.js"></script>
 </body>
-
 </html>

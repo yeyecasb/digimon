@@ -1,13 +1,13 @@
 #imagen { 
     transition: transform 0.2s ease-in-out;
-    border-radius: 6px; } 
-    #imagen:hover { transform: scale(2);}
+    border-radius: 12px; } 
+    #imagen:hover { transform: scale(1.5);}
 
 body {
     background-image: url("../images/fondo.jpg");
     }
 
 #principal {
-    background-color: #cccccc;
-    opacity: 0.9;
+    /*background-color: #cccccc;*/
+    opacity: 1;
 }
