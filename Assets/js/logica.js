@@ -1,135 +1,57 @@
-$(document).ready(function(){
-    let contenido=document.getElementById("listado");
+$(document).ready();
+let contenido = document.getElementById("listado");
 
 fetch('https://digimon-api.vercel.app/api/digimon')
-.then(response=>response.json())
-.then(resp=>{crearListado(resp)});
-
-function crearListado(resp){
-
-    for(let datoTemporal of resp){
-        contenido.innerHTML +=
-        `
-        <tr><td><img src=${datoTemporal.img} height="40" weight="40" id="imagen"></td>
-        <td>${datoTemporal.name}</td>
-        <td>${datoTemporal.level}</td></tr>
-        `
-    };
-};});
-
-$(document).ready(function(){
-    let dato=document.getElementById("Select1");
-
-fetch('https://digimon-api.vercel.app/api/digimon')
-.then(response=>response.json())
-.then(resp=>{crearListado(resp)});
-
-function crearListado(resp){
-
-    for(let datoTemporal of resp){
-        dato.innerHTML +=
-        `
-        <option>${datoTemporal.name}</option>
-        `
-    };
-    let contenido=document.getElementById("contenido");
-    select.addEventListener("change", function () {
-    let selectedValue = select.options[select.selectedIndex].value;
-    fetch("https://digimon-api.vercel.app/api/digimon/name"+selectedValue)
     .then(response => response.json())
-    .then(resp =>{crearCard(resp)});
-    function crearCard(resp){
+    .then(resp => { crearListado(resp) });
+
+function crearListado(resp) {
+
+    for (let datoTemporal of resp) {
         contenido.innerHTML +=
-        `
-        <img src="${resp.img}" class="card-img-top" id="foto" alt="...">
-        <div class="card-body">
-        <h4 id="name" class="card-title">${resp.name}</h4>
-        <p id="level" class="card-text">${resp.level}</p>
-      </div>
-      <br>
-        `
+            `<article class="col-12 col-sm-6 col-md-4 col-lg-2 my-2">
+                    <div class="card">
+                        <img class="img-fluid" src="${datoTemporal.img}" height="40" weight="40" id="imagen" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">${datoTemporal.name}</h5>
+                            <p class="card-text">${datoTemporal.level}</p>
+                            <a href="https://digimon.fandom.com/wiki/${datoTemporal.name}" class="btn btn-dark">Ver Wiki</a>
+                        </div>
+                    </div>
+                </article>
+          `
     };
-    });
-};});
-/*let contenido=document.getElementById("contenido");
+};
 
-    select.addEventListener("change", function () {
-    let selectedValue = select.options[select.selectedIndex].value;
-    console.log("El valor seleccionado es: " + selectedValue);
-    fetch("https://digimon-api.vercel.app/api/digimon/name"+selectedValue)
-    .then(response => response.json())
-    .then(data => {
-      tarjeta(data)
-    });
-  });
+function postBoton() {
+    document.getElementById("principal").style.display = "none";
+    let inputBusqueda = document.getElementById("inputBusqueda");
+    //let botonBusqueda = document.getElementById("botonBusqueda");
+    let terminoBusqueda = inputBusqueda.value;
+    url = "https://digimon-api.vercel.app/api/digimon/name/" + terminoBusqueda;
+    console.log(url);
+    fetch(url)
+        .then(response => response.json())
+        .then(resp => { crearCard(resp) });
+};
 
-  function tarjeta(data) {
+let tarjeta = document.getElementById("tarjeta");
 
-    contenido.innerHTML = "";
-
-    contenido.innerHTML +=
-      `
-      <div class="card" style="width: 20rem;">
-    
-      <img src="${data.img}" class="card-img-top" id="foto" alt="...">
-      <div class="card-body">
-        <h4 id="name" class="card-title">${data.name}</h4>
-        <p id="level" class="card-text">${data.level}</p>
-      </div>
-      <br>
-      `
-
-  }
-
-
-});
-
-$(document).ready(function () {
-
-  
-  
-    let select = document.getElementById("Select");
-  
-    select.addEventListener("change", function () {
-      let selectedValue = select.options[select.selectedIndex].value;
-      console.log("El valor seleccionado es: " + selectedValue);
-      fetch("https://studio-ghibli-films-api.herokuapp.com/api/"+selectedValue)
-      .then(response => response.json())
-      .then(data => {
-        tarjeta(data)
-      });
-    });
-  
-    function tarjeta(data) {
-  
-      informacion.innerHTML = "";
-  
-      informacion.innerHTML +=
+function crearCard(resp) {
+    //tarjeta.innerHTML = "";
+    tarjeta.innerHTML +=
         `
-        <option>Escoge un digimon...</option>
+    <div class="card row justify-content-md-center text-center col-12 my-5" >
+        <img src="${resp.img}" class="img-fluid" height="100" id="imagen" alt="...">
+        <div class="card-body col-12 my-5">
+          <h2 id="nombre" class="card-title">${resp.name}</h2>
+          <p id="nivel" class="card-text">${resp.level}</p>
+        </div>
+        <div class="card-body">
+        <a href="https://digimon.fandom.com/wiki/${resp.name}" class="btn btn-dark">Ver Wiki</a>
+        </div>
+    </div>
+    <br>`
+};
 
-        <div class="card" style="width: 20rem;">
-      
-        <img src="${data.poster}" class="card-img-top" id="foto" alt="...">
-        <div class="card-body">
-          <h4 id="titulo" class="card-title">${data.title}</h4>
-          <p id="historia" class="card-text">${data.synopsis}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li id="tituloRomanizado" class="list-group-item"><strong>Título romanizado:</strong> ${data.hepburn}</li>
-          <li id="anio" class="list-group-item"><strong>Año de estreno:</strong> ${data.release}</li>
-          <li id="anio" class="list-group-item"><strong>Director:</strong> ${data.director}</li>
-        
-        </ul>
-        <div class="card-body">
-          
-          <a href="${data.url}" target="_blank" class="btn btn-primary">Más información</a>
-        </div>
-        </div>
-        </div>
-        <br>
-        `
-  
-    }
-  
-  });*/
+
