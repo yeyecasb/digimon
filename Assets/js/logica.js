@@ -48,7 +48,7 @@ function crearCard(resp) {
           <p id="nivel" class="card-text">${resp.level}</p>
         </div>
         <div class="card-body">
-           <a href="https://digimon.fandom.com/wiki/${resp.name}" target="_blank" class="badge badge-dark">Datos Digimon</a>
+        <a href="https://digimon.fandom.com/wiki/${resp.name}" class="btn btn-dark">Ver Wiki</a>
         </div>
     </div>
     <br>`
