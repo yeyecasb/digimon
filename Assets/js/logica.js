@@ -35,10 +35,10 @@ function postBoton() {
         .then(resp => { crearCard(resp) });
 };
 
+let tarjeta = document.getElementById("tarjeta");
+
 function crearCard(resp) {
-    console.log(resp);
-    let tarjeta = document.getElementById("tarjeta");
-   // tarjeta.innerHTML = "";
+    //tarjeta.innerHTML = "";
     tarjeta.innerHTML +=
         `
     <div class="card row justify-content-md-center text-center col-12 my-5" >
@@ -48,7 +48,7 @@ function crearCard(resp) {
           <p id="nivel" class="card-text">${resp.level}</p>
         </div>
         <div class="card-body">
-           <a href="https://digimon.fandom.com/wiki/${resp.name}" target="_blank" class="btn btn-black">Datos Digimon</a>
+           <a href="https://digimon.fandom.com/wiki/${resp.name}" target="_blank" class="badge badge-dark">Datos Digimon</a>
         </div>
     </div>
     <br>`
